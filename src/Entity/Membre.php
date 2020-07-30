@@ -20,89 +20,158 @@ class Membre
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $membre_nom;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $membre_prenom;
+    private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $membre_civilite;
+    private $civilite;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $membre_adresse;
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $membre_code;
+    private $code;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $role = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="membre")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commande;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMembreNom(): ?string
+    public function getNom(): ?string
     {
-        return $this->membre_nom;
+        return $this->nom;
     }
 
-    public function setMembreNom(string $membre_nom): self
+    public function setNom(string $nom): self
     {
-        $this->membre_nom = $membre_nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getMembrePrenom(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->membre_prenom;
+        return $this->prenom;
     }
 
-    public function setMembrePrenom(string $membre_prenom): self
+    public function setPrenom(string $prenom): self
     {
-        $this->membre_prenom = $membre_prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getMembreCivilite(): ?string
+    public function getCivilite(): ?string
     {
-        return $this->membre_civilite;
+        return $this->civilite;
     }
 
-    public function setMembreCivilite(string $membre_civilite): self
+    public function setCivilite(string $civilite): self
     {
-        $this->membre_civilite = $membre_civilite;
+        $this->civilite = $civilite;
 
         return $this;
     }
 
-    public function getMembreAdresse(): ?string
+    public function getEmail(): ?string
     {
-        return $this->membre_adresse;
+        return $this->email;
     }
 
-    public function setMembreAdresse(string $membre_adresse): self
+    public function setEmail(string $email): self
     {
-        $this->membre_adresse = $membre_adresse;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getMembreCode(): ?int
+    public function getPassword(): ?string
     {
-        return $this->membre_code;
+        return $this->password;
     }
 
-    public function setMembreCode(int $membre_code): self
+    public function setPassword(string $password): self
     {
-        $this->membre_code = $membre_code;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getCode(): ?int
+    {
+        return $this->code;
+    }
+
+    public function setCode(int $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getRole(): ?array
+    {
+        return $this->role;
+    }
+
+    public function setRole(array $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
 
         return $this;
     }
