@@ -20,14 +20,10 @@ class Commande
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Membre::class, mappedBy="commande", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $membre;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $montant;
 
     /**
      * @ORM\Column(type="datetime")
@@ -35,13 +31,18 @@ class Commande
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DetailsCommande::class, inversedBy="commande")
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="commande", orphanRemoval=true)
      */
-    private $detailsCommande;
+    private $detailsCommandes;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $montant;
 
     public function __construct()
     {
-        $this->membre = new ArrayCollection();
+        $this->detailsCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,45 +50,14 @@ class Commande
         return $this->id;
     }
 
-    /**
-     * @return Collection|Membre[]
-     */
-    public function getMembre(): Collection
+    public function getMembre(): ?Membre
     {
         return $this->membre;
     }
 
-    public function addMembre(Membre $membre): self
+    public function setMembre(?Membre $membre): self
     {
-        if (!$this->membre->contains($membre)) {
-            $this->membre[] = $membre;
-            $membre->setCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMembre(Membre $membre): self
-    {
-        if ($this->membre->contains($membre)) {
-            $this->membre->removeElement($membre);
-            // set the owning side to null (unless already changed)
-            if ($membre->getCommande() === $this) {
-                $membre->setCommande(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getMontant(): ?float
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(float $montant): self
-    {
-        $this->montant = $montant;
+        $this->membre = $membre;
 
         return $this;
     }
@@ -104,14 +74,45 @@ class Commande
         return $this;
     }
 
-    public function getDetailsCommande(): ?DetailsCommande
+    /**
+     * @return Collection|DetailsCommande[]
+     */
+    public function getDetailsCommandes(): Collection
     {
-        return $this->detailsCommande;
+        return $this->detailsCommandes;
     }
 
-    public function setDetailsCommande(?DetailsCommande $detailsCommande): self
+    public function addDetailsCommande(DetailsCommande $detailsCommande): self
     {
-        $this->detailsCommande = $detailsCommande;
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes[] = $detailsCommande;
+            $detailsCommande->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if ($this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes->removeElement($detailsCommande);
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getCommande() === $this) {
+                $detailsCommande->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMontant(): ?float
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(float $montant): self
+    {
+        $this->montant = $montant;
 
         return $this;
     }
