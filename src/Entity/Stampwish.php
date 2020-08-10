@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use App\Repository\StampwishRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass=StampwishRepository::class)
  */
-class Article
+class Stampwish
 {
     /**
      * @ORM\Id()
@@ -18,11 +18,6 @@ class Article
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="article", orphanRemoval=true)
-     */
-    private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -35,7 +30,7 @@ class Article
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -45,50 +40,18 @@ class Article
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DetailsCommande::class, inversedBy="article")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="stampwish", orphanRemoval=true)
      */
-    private $detailsCommande;
+    private $detailsCommandes;
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
+        $this->detailsCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->category->contains($category)) {
-            $this->category->removeElement($category);
-            // set the owning side to null (unless already changed)
-            if ($category->getArticle() === $this) {
-                $category->setArticle(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getNom(): ?string
@@ -139,14 +102,33 @@ class Article
         return $this;
     }
 
-    public function getDetailsCommande(): ?DetailsCommande
+    /**
+     * @return Collection|DetailsCommande[]
+     */
+    public function getDetailsCommandes(): Collection
     {
-        return $this->detailsCommande;
+        return $this->detailsCommandes;
     }
 
-    public function setDetailsCommande(?DetailsCommande $detailsCommande): self
+    public function addDetailsCommande(DetailsCommande $detailsCommande): self
     {
-        $this->detailsCommande = $detailsCommande;
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes[] = $detailsCommande;
+            $detailsCommande->setStampwish($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if ($this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes->removeElement($detailsCommande);
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getStampwish() === $this) {
+                $detailsCommande->setStampwish(null);
+            }
+        }
 
         return $this;
     }
