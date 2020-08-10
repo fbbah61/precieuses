@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">Veuillez vous Inscrire</h1>
+    {{ form_start(form, {'attr' : {'class' : 'col-md-4 mx-auto'}})}}
+    {{ form_row(form.theme, {'label' : "Thème du Stampwish"}) }}
+    {{ form_row(form.nom_expediteur, {'label' : "Nom de l'expéditeur"}) }}
+    {{ form_row(form.nom_destinataire, {'label' : "Nom du Destinataire"}) }}
+    {{ form_row(form.adresse_destinataire, {'label' : "Adresse du Destinataire"})}}
+    <button class="btn btn-dark" type="submit">Créer un Stampwish</button>
+    {{ form_end(form)}}
+{% endblock %}

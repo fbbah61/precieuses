@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\DetailsCommande;
+use App\Entity\DetailCommande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method DetailsCommande|null find($id, $lockMode = null, $lockVersion = null)
- * @method DetailsCommande|null findOneBy(array $criteria, array $orderBy = null)
- * @method DetailsCommande[]    findAll()
- * @method DetailsCommande[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DetailCommande|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DetailCommande|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DetailCommande[]    findAll()
+ * @method DetailCommande[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DetailsCommandeRepository extends ServiceEntityRepository
+class DetailCommandeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, DetailsCommande::class);
+        parent::__construct($registry, DetailCommande::class);
     }
 
     // /**
-    //  * @return DetailsCommande[] Returns an array of DetailsCommande objects
+    //  * @return DetailCommande[] Returns an array of DetailCommande objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class DetailsCommandeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?DetailsCommande
+    public function findOneBySomeField($value): ?DetailCommande
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')

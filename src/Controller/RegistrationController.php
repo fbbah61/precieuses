@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Membre;
+use App\Entity\User;
 use App\Form\MembreType;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,10 @@ class RegistrationController extends AbstractController
      */
     public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
-        $membre = new Membre();
+        $user = new User();
 
 
-        $form = $this->createForm(MembreType::class, $membre);
+        $form = $this->createForm(UserType::class, $user);
         dump($request);
 
         $form->handleRequest($request);
@@ -30,21 +32,23 @@ class RegistrationController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
 
-            $hash = $encoder->encodePassword($membre,$membre->getPassword());
+            $hash = $encoder->encodePassword($user,$user->getPassword());
             //on recupere le mot de pass du formulaire (non hacher pour le moment) pour le transmettre a la methode encodeâssword
             //qui va se charger d'encoder le mot de passee
 
-            $membre->setPassword($hash);//on envoie le mdp hacher ds le setteur de l'objet $user afin qu'il soit inserrer ds la bdd
+            $user->setPassword($hash);//on envoie le mdp hacher ds le setteur de l'objet $user afin qu'il soit inserrer ds la bdd
 
-//            switch($membre->getFunction()) {
-//                case 'admin':
-//                    $membre->setRoles(['ROLE_ADMIN']);
-//                    break;
-//                case 'user':
-//                    $membre->setRoles(['ROLE_USER']);
-//                    break;
-//            }
-            $manager->persist($membre);
+    //            switch($membre->getFunction()) {
+    //                case 'admin':
+    //                    $membre->setRoles(['ROLE_ADMIN']);
+    //                    break;
+    //                case 'user':
+    //                    $membre->setRoles(['ROLE_USER']);
+    //                    break;
+    //            }
+            // Si tu veux lui accorder des rôles avant de l'ajouter en table d'est ici
+            $user->setRoles(["ROLE_USER", "ROLE_FOUILLEUR"]);
+            $manager->persist($user);
 
             $manager->flush();
            return $this->redirectToRoute('security_login');//on redirige vers la page de connexion
@@ -55,8 +59,11 @@ class RegistrationController extends AbstractController
 
         ]);
     }
+
     /**
      * @Route("/connexion", name="security_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

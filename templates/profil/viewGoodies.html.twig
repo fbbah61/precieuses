@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <h1 class="display-4 text-center my-4">Details de l'article</h1>
+
+    <div class="col-md-5 border border-secondary rounded mr-1 mb-1 text-center mx-auto ">
+        <img src="{{goodies.photo}}" alt="" class="w-50 h-30"><hr>
+        <p>{{goodies.description|slice(3,200)|raw}}... </p><hr>
+        <p>{{ goodies.prix }}€</p><hr>
+        <a href="" class="btn btn-success mb-5"> Ajouter au Panier </a>
+
+    </div>
+    <a href="{{ path('liste')}}" class="btn btn-primary mb-5"> pour revenir sur les Goodies cliquez ici</a>
+
+{% endblock %}

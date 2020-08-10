@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <h1 class="display-4 text-center my-4">Details de l'article</h1>
+
+    <div class="col-md-12 border border-secondary rounded mr-1 mb-1 text-center">
+        <p>{{stampwish.id}}</p>
+        <p>{{stampwish.theme}}</p>
+        <p>{{stampwish.nomExpediteur}}</p>
+        <p>{{stampwish.nomDestinataire}}</p>
+        <p>{{stampwish.adresseDestinataire}}</p>
+    </div>
+{% endblock %}

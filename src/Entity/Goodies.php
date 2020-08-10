@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GoodiesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,15 +22,10 @@ class Goodies
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $photo;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
@@ -37,21 +34,19 @@ class Goodies
      */
     private $prix;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DetailCommande::class, mappedBy="goodies", orphanRemoval=true)
+     */
+    private $detailCommandes;
+
+    public function __construct()
+    {
+        $this->detailCommandes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
     }
 
     public function getPhoto(): ?string
@@ -86,6 +81,37 @@ class Goodies
     public function setPrix(float $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailCommande[]
+     */
+    public function getDetailCommandes(): Collection
+    {
+        return $this->detailCommandes;
+    }
+
+    public function addDetailCommande(DetailCommande $detailCommande): self
+    {
+        if (!$this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes[] = $detailCommande;
+            $detailCommande->setGoodies($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailCommande(DetailCommande $detailCommande): self
+    {
+        if ($this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes->removeElement($detailCommande);
+            // set the owning side to null (unless already changed)
+            if ($detailCommande->getGoodies() === $this) {
+                $detailCommande->setGoodies(null);
+            }
+        }
 
         return $this;
     }

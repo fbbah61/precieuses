@@ -18,6 +18,15 @@
                    <img src="">
                </div>
                <ul>
+                   {% if not app.user %}
+                       <li class="menu">
+                           <a class="nav-link" href="{{ path('security_login')}}">Identifiez-vous <span class="sr-only">(current)</span></a>
+                       </li>
+                       <li class="menu">
+                           <a class="nav-link" href="{{ path('security_registration')}}">Creer un Compte<span class="sr-only">(current)</span></a>
+                       </li>
+                   {% endif %}
+
                    <li class="menu">
                        <a href="#">Accueil</a>
                        <ul class="submenu">
@@ -33,14 +42,7 @@
                        </ul>
                    </li>
                    <li class="menu">
-                       <a href="#">Les Stampwish</a>
-                       <ul class="submenu">
-                           <li><a href="#">Titre</a></li>
-                           <li><a href="#">Titre</a></li>
-                       </ul>
-                   </li>
-                   <li class="menu">
-                       <a href="#">Membre</a>
+                       <a href="{{ path('create_stampwish')}}">Les Stampwish</a>
                        <ul class="submenu">
                            <li><a href="#">Titre</a></li>
                            <li><a href="#">Titre</a></li>
