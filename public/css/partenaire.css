@@ -1,0 +1,43 @@
+*{
+    text-decoration:none;
+}
+
+
+.part_left{
+  margin-top: 4vh;
+}
+
+.part_right{
+  margin-top: 4vh;
+   
+}
+
+h1{
+    text-align: center;
+}
+
+.pico{
+    background: rgb(181, 245, 5);
+    width:auto;
+}
+
+.rolo{
+    width: auto;
+    height: 8vw;
+    background: rebeccapurple;
+}
+
+.rolol{
+    width: auto;
+    height: auto;
+    background: rebeccapurple;
+}
+
+.title_partenair{
+    background:rgb(181, 180, 180); border:solid 2px grey; color:rgb(78, 78, 78); width: auto;
+}
+
+
+.paragraphe_style{
+    background:rgb(209, 207, 207); border:solid 2px rgb(143, 142, 142); color:rgb(78, 78, 78); margin-top:10vh
+}
