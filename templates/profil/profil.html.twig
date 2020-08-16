@@ -2,11 +2,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="">
-        <h1>Bonjour {{ app.user.username }}</h1>
-        <div class="page"><a href="">Créer un Stampwish</a></div>
-        <div class="page"><a href="">Commander un Goodies</a></div>
-        <div class="page"><a href="">Mes Commandes</a></div>
+    <div class="cadre">
+        <h1 class="col-12 col-sm-10 col-md-10 col-lg-8 mx-auto">Bonjour {{ app.user.username }}</h1>
+        <div class="page col-12 col-sm-10 col-md-10 col-lg-8 mx-auto"><a href="{{ path('create_stampwish')}}">Créer un Stampwish</a></div>
+        <div class="page1 col-12 col-sm-10 col-md-10 col-lg-8 mx-auto"><a href="{{ path('liste')}}">Commander un Goodies</a></div>
+        <div class="page2 col-12 col-sm-10 col-md-10 col-lg-8 mx-auto"><a href="">Mes Commandes</a></div>
     </div>
+
+
 
 {% endblock %}

@@ -76,6 +76,7 @@ class ProfilController extends AbstractController
 
         ]);
     }
+
     /**
      * @Route("/viewGoodies/{id}", name="viewGoodies")
      */

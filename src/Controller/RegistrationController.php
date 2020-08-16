@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
     //                    break;
     //            }
             // Si tu veux lui accorder des rôles avant de l'ajouter en table d'est ici
-            $user->setRoles(["ROLE_USER", "ROLE_FOUILLEUR"]);
+            $user->setRoles(["ROLE_USER"]);
             $manager->persist($user);
 
             $manager->flush();

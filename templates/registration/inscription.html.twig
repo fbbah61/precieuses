@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    <div class="inscription">
     <h1 class="display-4 text-center my-4">Veuillez vous Inscrire</h1>
     {{ form_start(form, {'attr' : {'class' : 'col-md-4 mx-auto'}})}}
         {{ form_row(form.username, {'label' : "Username"}) }}
@@ -10,4 +11,5 @@
         {{ form_row(form.confirm_password, {'label' : "Confirmer votre mot de passe"})}}
         <button class="btn btn-dark" type="submit">Inscription</button>
     {{ form_end(form)}}
+    </div>
 {% endblock %}
