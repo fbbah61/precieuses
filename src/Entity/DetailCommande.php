@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DetailsCommandeRepository;
+use App\Repository\DetailCommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DetailsCommandeRepository::class)
+ * @ORM\Entity(repositoryClass=DetailCommandeRepository::class)
  */
-class DetailsCommande
+class DetailCommande
 {
     /**
      * @ORM\Id()
@@ -18,16 +18,22 @@ class DetailsCommande
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="detailsCommandes")
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="detailCommandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Stampwish::class, inversedBy="detailsCommandes")
+     * @ORM\ManyToOne(targetEntity=Stampwish::class, inversedBy="detailCommandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $stampwish;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Goodies::class, inversedBy="detailCommandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $goodies;
 
     /**
      * @ORM\Column(type="integer")
@@ -64,6 +70,18 @@ class DetailsCommande
     public function setStampwish(?Stampwish $stampwish): self
     {
         $this->stampwish = $stampwish;
+
+        return $this;
+    }
+
+    public function getGoodies(): ?Goodies
+    {
+        return $this->goodies;
+    }
+
+    public function setGoodies(?Goodies $goodies): self
+    {
+        $this->goodies = $goodies;
 
         return $this;
     }

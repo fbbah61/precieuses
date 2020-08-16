@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\MembreRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,13 +11,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=MembreRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  *  @UniqueEntity(
  * fields = {"email"},
  * message="un compte est deja existant a cette adresse Email!!"
  * )
  */
-class Membre implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -29,36 +29,17 @@ class Membre implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $civilite;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $adresse;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $code_postal;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8",minMessage="votre message doit faire minimum 8 caracter")
+     *  @Assert\Length(min="8",minMessage="votre message doit faire minimum 8 caracter")
      * @Assert\EqualTo(propertyPath="confirm_password", message="les mots de passe ne correspondent pas")
      */
     private $password;
@@ -71,14 +52,12 @@ class Membre implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $role = [];
+    private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="membre", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user", orphanRemoval=true)
      */
     private $commandes;
-
-
 
     public function __construct()
     {
@@ -90,38 +69,14 @@ class Membre implements UserInterface
         return $this->id;
     }
 
-    public function getCivilite(): ?string
+    public function getUsername(): ?string
     {
-        return $this->civilite;
+        return $this->username;
     }
 
-    public function setCivilite(string $civilite): self
+    public function setUsername(string $username): self
     {
-        $this->civilite = $civilite;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
+        $this->username = $username;
 
         return $this;
     }
@@ -138,30 +93,6 @@ class Membre implements UserInterface
         return $this;
     }
 
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?int
-    {
-        return $this->code_postal;
-    }
-
-    public function setCodePostal(int $code_postal): self
-    {
-        $this->code_postal = $code_postal;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -170,18 +101,6 @@ class Membre implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRole(): ?array
-    {
-        return $this->role;
-    }
-
-    public function setRole(array $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
@@ -198,7 +117,7 @@ class Membre implements UserInterface
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes[] = $commande;
-            $commande->setMembre($this);
+            $commande->setUser($this);
         }
 
         return $this;
@@ -209,23 +128,17 @@ class Membre implements UserInterface
         if ($this->commandes->contains($commande)) {
             $this->commandes->removeElement($commande);
             // set the owning side to null (unless already changed)
-            if ($commande->getMembre() === $this) {
-                $commande->setMembre(null);
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
             }
         }
 
         return $this;
     }
-    //cette methode est uniquement destinee a nettoyer les mdp en texte brut eventuellement stocke
     public function eraseCredentials()
     {
 
     }
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-
     //renvoie la chaine de caractere encoder que l'utilisateur a saisi qui a ete utiliser a l'origine pour coder le mdp
 
     public function getSalt()
@@ -234,21 +147,29 @@ class Membre implements UserInterface
     }
     public function __toString()
     {
-        return $this->email;
+        return $this->email . '';
     }
 
-    // cette methode renvoie un tableau de chaine de caractere ou sont stockes les roles accorder a l'utilisateur
-    public function getRoles()
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        //return ['ROLE_USER'];
-        return $this->Roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
-    public function setRoles(array $Roles): self
+
+    public function setRoles(array $roles): self
     {
-        $this->Roles = $Roles;
+        $this->roles = $roles;
 
         return $this;
     }
 
-
+    public function addRole($role) {
+        if (!in_array($role, $this->getRoles())) array_push($this->roles, $role);
+    }
 }

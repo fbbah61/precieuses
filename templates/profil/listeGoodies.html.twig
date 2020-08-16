@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Blog Symfony | liste des Goodies!{% endblock %}
+
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">Liste des Goodies </h1>
+
+<div class="row d-flex justify-content-center">
+    {% for lister in liste %}
+
+        <div class="col-md-3 border border-secondary rounded mr-1 mb-1 text-center">
+            <img src="{{lister.photo}}" alt=""><hr>
+            <p>{{lister.description|slice(3,200)|raw}}... </p><hr>
+            <p>{{ lister.prix }}€</p><hr>
+
+            <p><a class="btn btn-secondary" href="{{ path('viewGoodies',{'id': lister.id}) }}" role="button">View details &raquo;</a></p>
+        </div>
+
+        {# date() filtre twig qui permet d'afficher la date et l'heure #}
+        {# newArticle.createAt: la bdd renvoie un objet datetime , il n'est pas possible de convertir un objet en une chaine de caractere  #}
+        {# sans filtre twig raw , mes balises <p></p> s'affiche , nous utlisons ce filtre pour l'affichage brut #}
+    {% endfor %}
+
+    {% endblock %}

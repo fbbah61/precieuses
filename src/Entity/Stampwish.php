@@ -22,31 +22,31 @@ class Stampwish
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private $theme;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $photo;
+    private $nomExpediteur;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private $nomDestinataire;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=255)
      */
-    private $prix;
+    private $adresseDestinataire;
 
     /**
-     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="stampwish", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=DetailCommande::class, mappedBy="stampwish", orphanRemoval=true)
      */
-    private $detailsCommandes;
+    private $detailCommandes;
 
     public function __construct()
     {
-        $this->detailsCommandes = new ArrayCollection();
+        $this->detailCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,79 +54,79 @@ class Stampwish
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTheme(): ?string
     {
-        return $this->nom;
+        return $this->theme;
     }
 
-    public function setNom(string $nom): self
+    public function setTheme(string $theme): self
     {
-        $this->nom = $nom;
+        $this->theme = $theme;
 
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getNomExpediteur(): ?string
     {
-        return $this->photo;
+        return $this->nomExpediteur;
     }
 
-    public function setPhoto(string $photo): self
+    public function setNomExpediteur(string $nomExpediteur): self
     {
-        $this->photo = $photo;
+        $this->nomExpediteur = $nomExpediteur;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getNomDestinataire(): ?string
     {
-        return $this->description;
+        return $this->nomDestinataire;
     }
 
-    public function setDescription(string $description): self
+    public function setNomDestinataire(string $nomDestinataire): self
     {
-        $this->description = $description;
+        $this->nomDestinataire = $nomDestinataire;
 
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getAdresseDestinataire(): ?string
     {
-        return $this->prix;
+        return $this->adresseDestinataire;
     }
 
-    public function setPrix(float $prix): self
+    public function setAdresseDestinataire(string $adresseDestinataire): self
     {
-        $this->prix = $prix;
+        $this->adresseDestinataire = $adresseDestinataire;
 
         return $this;
     }
 
     /**
-     * @return Collection|DetailsCommande[]
+     * @return Collection|DetailCommande[]
      */
-    public function getDetailsCommandes(): Collection
+    public function getDetailCommandes(): Collection
     {
-        return $this->detailsCommandes;
+        return $this->detailCommandes;
     }
 
-    public function addDetailsCommande(DetailsCommande $detailsCommande): self
+    public function addDetailCommande(DetailCommande $detailCommande): self
     {
-        if (!$this->detailsCommandes->contains($detailsCommande)) {
-            $this->detailsCommandes[] = $detailsCommande;
-            $detailsCommande->setStampwish($this);
+        if (!$this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes[] = $detailCommande;
+            $detailCommande->setStampwish($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    public function removeDetailCommande(DetailCommande $detailCommande): self
     {
-        if ($this->detailsCommandes->contains($detailsCommande)) {
-            $this->detailsCommandes->removeElement($detailsCommande);
+        if ($this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes->removeElement($detailCommande);
             // set the owning side to null (unless already changed)
-            if ($detailsCommande->getStampwish() === $this) {
-                $detailsCommande->setStampwish(null);
+            if ($detailCommande->getStampwish() === $this) {
+                $detailCommande->setStampwish(null);
             }
         }
 

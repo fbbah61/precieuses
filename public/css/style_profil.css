@@ -1,0 +1,25 @@
+.page{
+    height: 10vh;
+    background-color: #5eb5e0;
+    font-size: 30px;
+    align-items: center;
+
+}
+.page1{
+    margin-top: 5px;
+    height: 10vh;
+    background-color: rebeccapurple;
+    font-size: 30px;
+    align-items: center;
+}
+.page2{
+    margin-top: 5px;
+    height: 10vh;
+     background-color: darkgreen;
+    font-size: 30px;
+    align-items: center;
+ }
+.cadre{
+   margin-top: 50px;
+}
+
