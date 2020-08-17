@@ -1,0 +1,24 @@
+*{
+    text-decoration:none;
+}
+
+.carousel{
+    margin: 0;
+}
+
+.part_left{
+  margin-top: 4vh;
+}
+
+.part_right{
+  margin-top: 4vh;
+   
+}
+
+h1{
+    text-align: center;
+}
+
+.title_concept{
+    background:rgb(181, 180, 180); border:solid 2px grey; color:rgb(78, 78, 78)
+}
