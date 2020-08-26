@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ asset('css/style_menu.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/all.css') }}">
+{% endblock %}
+
+{% block title %}{{title}}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="container d-flex">
+		<div class="part_left col-12 col-md-8">
+			<h1>Form</h1> 
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus, mollitia libero. Illo itaque 
+			possimus perferendis iure totam voluptate illum et, ipsam animi facere maiores odit natus ea deserunt, 
+			voluptatum est?
+		</div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		<div class="part_right col-12 col-md-4">
+			<h1 class="title_contact">{{ title }}</h1>
+			<div class="paragraphe_style">
+                <p> 
+					<h1>info stampwish</h1>    
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure molestiae laudantium cupiditate? 
+					Quaerat, laudantium animi alias eum voluptatum magni illum dolorem enim officiis iusto inventore 
+					vel corrupti eos incidunt! Minus?
+                </p>
+            </div>
+		</div>
+	</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/precieuses/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/precieuses/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
+
