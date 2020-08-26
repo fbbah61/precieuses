@@ -1,0 +1,13 @@
+.part_all{
+    margin-top: 4vh; background: rgb(170, 170, 170); border: solid rgb(32, 32, 32) 2px;
+    
+}
+
+.user_name{
+    margin-top: 2vh;
+}
+
+.style_bouton{
+    width: 100%;
+    margin-bottom: 2vh;
+}
