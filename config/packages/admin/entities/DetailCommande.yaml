@@ -1,0 +1,24 @@
+easy_admin:
+  entities:
+    DetailCommande:
+      class: App\Entity\DetailCommande
+      form:
+        fields:
+          - {property: 'commande', label: 'Commande'}
+          - {property: 'stampwish', label: 'Stampwish'}
+          - {property: 'Goodies', label: 'Goodies'}
+          - {property: 'quantite', label: 'Quantite'}
+          - {property: 'prix', label: 'Prix'}
+
+
+      list:
+        fields:
+          - {property: 'commande', label: 'Commande'}
+          - {property: 'stampwish', label: 'Stampwish'}
+          - {property: 'Goodies', label: 'Goodies'}
+          - {property: 'quantite', label: 'Quantite'}
+          - {property: 'prix', label: 'Prix'}
+
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-primary'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}

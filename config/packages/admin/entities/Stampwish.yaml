@@ -1,0 +1,22 @@
+easy_admin:
+  entities:
+    Stampwish:
+      class: App\Entity\Stampwish
+      form:
+        fields:
+          - {property: 'theme',label: 'Thème'}
+          - {property: 'nomExpediteur',label: 'Nom de L expéditeur'}
+          - {property: 'nomDestintateur',label: 'Nom du Destinataire'}
+          - {property: 'adresseDestintateur',label: 'Adresse du Destinataire'}
+
+
+      list:
+        fields:
+          - {property: 'theme',label: 'Thème'}
+          - {property: 'nomExpediteur',label: 'Nom de L expéditeur'}
+          - {property: 'nomDestinataire',label: 'Nom du Destinataire'}
+          - {property: 'adresseDestinataire',label: 'Adresse du Destinataire'}
+
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-primary'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}

@@ -1,0 +1,16 @@
+easy_admin:
+  entities:
+    Questionnaire:
+      class: App\Entity\Questionnaire
+      form:
+        fields:
+          - {property: 'user', label: 'utilisateurs'}
+          - {property: 'titre', label: 'Titre'}
+
+      list:
+        fields:
+          - {property: 'user', label: 'utilisateurs'}
+          - {property: 'titre', label: 'Titre'}
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-primary'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}

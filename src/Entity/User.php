@@ -172,4 +172,5 @@ class User implements UserInterface
     public function addRole($role) {
         if (!in_array($role, $this->getRoles())) array_push($this->roles, $role);
     }
+
 }
