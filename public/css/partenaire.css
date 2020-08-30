@@ -1,0 +1,20 @@
+.pico{
+    background: rgb(181, 245, 5);
+    width:auto;
+}
+
+.rolo{
+    width: auto;
+    height: 8vw;
+    background: rebeccapurple;
+}
+
+.rolol{
+    width: auto;
+    height: auto;
+    background: rebeccapurple;
+}
+
+.title_partenair{
+    background:rgb(181, 180, 180); border:solid 2px grey; color:rgb(78, 78, 78); width: auto;
+}

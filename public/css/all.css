@@ -1,0 +1,23 @@
+*{
+  text-decoration:none;
+}
+
+.part_left{
+  margin-top: 4vh; background: rgb(170, 170, 170); border: solid rgb(32, 32, 32) 2px;
+}
+
+.part_right{
+  margin-top: 4vh;  
+}
+
+h1{
+  text-align: center;
+}
+
+.title_contact{
+  background:rgb(181, 180, 180); border:solid 2px grey; color:rgb(78, 78, 78); width: auto;
+}
+
+.paragraphe_style{
+  background: rgb(170, 170, 170); border: solid rgb(32, 32, 32) 2px; color:rgb(78, 78, 78); margin-top:10vh
+}
