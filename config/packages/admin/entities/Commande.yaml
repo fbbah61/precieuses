@@ -1,0 +1,19 @@
+easy_admin:
+  entities:
+    Commande:
+      class: App\Entity\Commande
+      form:
+        fields:
+          - {property: 'user', label: 'Utilistateur'}
+          - {property: 'date', label: 'Date'}
+          - {property: 'montant', label: 'Montant'}
+
+      list:
+        fields:
+          - {property: 'user', label: 'Utilistateur'}
+          - {property: 'date', label: 'Date'}
+          - {property: 'montant', label: 'Montant'}
+
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-primary'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}

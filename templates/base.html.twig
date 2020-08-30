@@ -5,6 +5,8 @@
         <title>{% block title %}Les Précieuses Timbrées{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
             <link rel="stylesheet" href="{{ asset('css/style_menu.css') }}">
             <link rel="stylesheet" href="{{ asset('css/style_profil.css') }}">
 
@@ -43,13 +45,7 @@
                            <li><a href="#">Titre</a></li>
                        </ul>
                    </li>
-                   <li class="menu">
-                       <a href="{{ path('create_stampwish')}}">Les Stampwish</a>
-                       <ul class="submenu">
-                           <li><a href="#">Titre</a></li>
-                           <li><a href="#">Titre</a></li>
-                       </ul>
-                   </li>
+
                    <li class="menu">
                        <a href="#">Partenaire</a>
                        <ul class="submenu">
@@ -57,13 +53,12 @@
                            <li><a href="#">Titre</a></li>
                        </ul>
                    </li>
-                   <li class="menu">
-                       <a href="#">Goodies</a>
-                       <ul class="submenu">
-                           <li><a href="#">Titre</a></li>
-                           <li><a href="#">Titre</a></li>
-                       </ul>
-                   </li>
+                   {% if app.user %}
+                       <li>
+                           <a href="{{ path("profil", {"id" : app.session}) }}">Mon Espace Personnel</a>
+
+                       </li>
+                   {% endif %}
                    <li class="menu">
                        <a href="#">Panier</a>
                        <ul class="submenu">
@@ -74,11 +69,19 @@
                    <li class="menu">
                        <a href="#">Contact</a>
                    </li>
+                   {% if is_granted('ROLE_ADMIN') %}
+
+                   <li class="menu">
+                       <a href="{{ path('easyadmin') }}">Backoffice</a>
+                   </li>
+
+                   {% endif %}
 
                </ul>
            </nav>
 
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
 
 
 

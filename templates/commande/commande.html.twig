@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Blog Symfony | liste de ma commande!{% endblock %}
+
+
+{% block body %}
+    <h1 class="display-4 text-center my-4">Liste de ma commande </h1>
+
+    <div class="row d-flex justify-content-center">
+       {% for commander in commande %}
+
+
+          <div class="col-md-3 border border-secondary rounded mr-1 mb-1 text-center">
+            <div class=" col-12 col-sm-10 col-md-10 col-lg-8 mx-auto">Numéro de la commande {{ commander.id}}</div><hr>
+            <div class=" col-12 col-sm-10 col-md-10 col-lg-8 mx-auto">date de la commande {{ commander.date|date("m/d/Y")}}</div><hr>
+
+
+
+
+            <p><a class="btn btn-secondary" href="{{ path('detail',{'id':commander.id}) }}" role="button">View details &raquo;</a></p>
+           </div>
+       {% endfor %}
+        {# date() filtre twig qui permet d'afficher la date et l'heure #}
+        {# newArticle.createAt: la bdd renvoie un objet datetime , il n'est pas possible de convertir un objet en une chaine de caractere  #}
+        {# sans filtre twig raw , mes balises <p></p> s'affiche , nous utlisons ce filtre pour l'affichage brut #}
+
+{% endblock %}

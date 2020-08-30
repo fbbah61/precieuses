@@ -39,6 +39,11 @@ class Goodies
      */
     private $detailCommandes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
     public function __construct()
     {
         $this->detailCommandes = new ArrayCollection();
@@ -114,5 +119,23 @@ class Goodies
         }
 
         return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->title;
+
     }
 }

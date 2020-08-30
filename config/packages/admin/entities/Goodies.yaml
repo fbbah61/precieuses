@@ -1,0 +1,23 @@
+easy_admin:
+  entities:
+    Goodies:
+      class: App\Entity\Goodies
+      form:
+        fields:
+          - {property: 'title', label: 'Titre'}
+          - {property: 'photo', type: 'file'}
+          - {property: 'description', label: 'Description'}
+          - {property: 'prix', label: 'Prix'}
+
+
+      list:
+        fields:
+          - {property: 'title', label: 'Titre'}
+          - {property: 'photo', type: 'image'}
+          - {property: 'description', label: 'Description'}
+          - {property: 'prix', label: 'Prix'}
+
+
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-primary'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}

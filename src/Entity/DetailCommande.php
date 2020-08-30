@@ -45,6 +45,14 @@ class DetailCommande
      */
     private $prix;
 
+    public function __construct()
+    {
+        $this->commande = new ArrayCollection();
+        $this->stampwish = new ArrayCollection();
+        $this->goodies = new ArrayCollection();
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,4 +117,5 @@ class DetailCommande
 
         return $this;
     }
+
 }
