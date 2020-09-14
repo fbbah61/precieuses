@@ -8,8 +8,12 @@ use App\Entity\User;
 use App\Form\StampwishType;
 use App\Repository\StampwishRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfilController extends AbstractController
@@ -28,41 +32,43 @@ class ProfilController extends AbstractController
         }
         return $this->render('profil/profil.html.twig');
     }
+
     /**
      * @Route("/create", name="create_stampwish")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return RedirectResponse|Response
      */
     public function create(Request $request, EntityManagerInterface $manager)
     {
-        $stampwish = new Stampwish();
+            $stampWish = new Stampwish($this->getUser());
 
 
-        $form = $this->createForm(StampwishType::class, $stampwish);
+
+        $form = $this->createForm(StampwishType::class, $stampWish);
         dump($request);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
-
-            $manager->persist($stampwish);
-
+            $manager->persist($stampWish);
             $manager->flush();
-            return $this->redirectToRoute('view');
 
+            return $this->redirectToRoute("stamp_wish_view", ["id" => $stampWish->getId()]);
         }
         return $this->render('profil/createStampwish.html.twig',[
         'form' => $form->createView()
         ]);
     }
+
     /**
-     * @Route("/view", name="view")
+     * @Route("/view/{id}", name="stamp_wish_view")
+     * @param Stampwish $stampwish
+     * @return Response
      */
-    public function show()
-    {
-
+    public function show(Stampwish $stampwish) {
         return $this->render('profil/viewStampwish.html.twig', [
-            'stampwish' => $this->getDoctrine()->getRepository(Stampwish::class)->findAll()
-
+            'stampwish' => $stampwish,
         ]);
     }
     /**
@@ -70,7 +76,6 @@ class ProfilController extends AbstractController
      */
     public function liste()
     {
-
         return $this->render('profil/listeGoodies.html.twig', [
             'liste' => $this->getDoctrine()->getRepository(Goodies::class)->findAll()
 
@@ -82,15 +87,8 @@ class ProfilController extends AbstractController
      */
     public function showGoodies(Goodies $goodies)
     {
-
-
-
         return $this->render('profil/viewGoodies.html.twig',[
             'goodies' =>$goodies
         ]);
-
-
-
-
     }
 }

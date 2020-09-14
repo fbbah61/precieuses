@@ -6,9 +6,13 @@ use App\Repository\GoodiesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=GoodiesRepository::class)
+ * @Vich\Uploadable()
  */
 class Goodies
 {
@@ -23,6 +27,13 @@ class Goodies
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
+
+    /**
+     * @Vich\UploadableField(mapping="uploads_images", fileNameProperty="photo")
+     */
+
+    private $photoFile;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,9 +55,20 @@ class Goodies
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $update_at;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Cart::class, mappedBy="goodies")
+     */
+    private $carts;
+
     public function __construct()
     {
         $this->detailCommandes = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,7 +81,7 @@ class Goodies
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
@@ -138,4 +160,67 @@ class Goodies
         return $this->title;
 
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * @param mixed $photoFile
+     * @return Goodies
+     */
+    public function setPhotoFile(?File $photoFile = null): self
+    {
+        $this->photoFile = $photoFile;
+        if($this->photoFile instanceof UploadedFile){
+            $this->update_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->addGoody($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->contains($cart)) {
+            $this->carts->removeElement($cart);
+            $cart->removeGoody($this);
+        }
+
+        return $this;
+    }
+
 }

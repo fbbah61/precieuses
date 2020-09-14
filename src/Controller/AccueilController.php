@@ -14,7 +14,7 @@ class AccueilController extends AbstractController
     public function index()
     {
         return $this->render('accueil/index.html.twig', [
-            'timbre' => $this->getDoctrine()->getRepository(Timbre::class)->findBy(["id" => 1])[0],
+//            'timbre' => $this->getDoctrine()->getRepository(Timbre::class)->findBy(["id" => 1])[0],
         ]);
     }
 }

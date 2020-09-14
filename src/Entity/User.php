@@ -59,9 +59,21 @@ class User implements UserInterface
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Stampwish::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $stampwishes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user")
+     */
+    private $carts;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->stampwishes = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -171,6 +183,68 @@ class User implements UserInterface
 
     public function addRole($role) {
         if (!in_array($role, $this->getRoles())) array_push($this->roles, $role);
+    }
+
+    /**
+     * @return Collection|Stampwish[]
+     */
+    public function getStampwishes(): Collection
+    {
+        return $this->stampwishes;
+    }
+
+    public function addStampwish(Stampwish $stampwish): self
+    {
+        if (!$this->stampwishes->contains($stampwish)) {
+            $this->stampwishes[] = $stampwish;
+            $stampwish->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStampwish(Stampwish $stampwish): self
+    {
+        if ($this->stampwishes->contains($stampwish)) {
+            $this->stampwishes->removeElement($stampwish);
+            // set the owning side to null (unless already changed)
+            if ($stampwish->getUser() === $this) {
+                $stampwish->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->contains($cart)) {
+            $this->carts->removeElement($cart);
+            // set the owning side to null (unless already changed)
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 }

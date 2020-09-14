@@ -5,17 +5,20 @@ easy_admin:
       form:
         fields:
           - {property: 'title', label: 'Titre'}
-          - {property: 'photo', type: 'file'}
+          - {property: 'photofile', type: 'file'}
           - {property: 'description', label: 'Description'}
           - {property: 'prix', label: 'Prix'}
+
 
 
       list:
         fields:
           - {property: 'title', label: 'Titre'}
-          - {property: 'photo', type: 'image'}
+          - {property: 'photo', type: 'photo', base_path: 'http://localhost:8000/uploads/images/' }
           - {property: 'description', label: 'Description'}
           - {property: 'prix', label: 'Prix'}
+          - {property: 'update_at', label: 'Date'}
+
 
 
         actions:

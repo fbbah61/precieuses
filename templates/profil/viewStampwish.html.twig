@@ -1,13 +1,30 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
-    <h1 class="display-4 text-center my-4">Details de l'article</h1>
+    <h1 class="display-4 text-center my-4">Details du stampwish</h1>
+    <br><br>
+    <div class="conntainer">
+        <table class="table table-bordered col-md-8 mx-auto">
+            <thead>
+            <tr>
+                <th>Nom de l'utilisateur</th>
+                <th>Thème</th>
+                <th>Nom de L'expéditeur</th>
+                <th>Nom du Destinataire</th>
+                <th>Adresse du Destinataire</th>
 
-    <div class="col-md-12 border border-secondary rounded mr-1 mb-1 text-center">
-        <p>{{stampwish.id}}</p>
-        <p>{{stampwish.theme}}</p>
-        <p>{{stampwish.nomExpediteur}}</p>
-        <p>{{stampwish.nomDestinataire}}</p>
-        <p>{{stampwish.adresseDestinataire}}</p>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{stampwish.user}}</td>
+                    <td>{{stampwish.theme}}</td>
+                    <td>{{stampwish.nomExpediteur}}</td>
+                    <td>{{stampwish.nomDestinataire}}</td>
+                    <td>{{stampwish.adresseDestinataire}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
     </div>
 {% endblock %}
