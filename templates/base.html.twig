@@ -20,15 +20,15 @@
        <nav>
            <label class="logo">PrécieusesT</label>
            <ul>
-               <li><a href="#" class="active">Accueil</a></li>
-               <li><a href="#">Concept</a></li>
+               <li><a href="{{ path('accueil') }}" class="active">Accueil</a></li>
+               <li><a href="{{ path('concept') }}">Concept</a></li>
                {% if app.user %}
                    <li>
                        <a href="{{ path("profil", {"id" : app.session}) }}">Mon Compte</a>
 
                    </li>
                {% endif %}
-               <li><a href="#">Contact</a></li>
+               <li><a href="{{ path('contact') }}">Contact</a></li>
                <li><a href="{{ path('cart') }}">Panier ({{ render(controller('App\\Controller\\CartController::countAndSumCart')) }})</a></li>
                {% if not app.user %}
                    <li class="nav-item">

@@ -20,7 +20,10 @@ class CartController extends AbstractController
 
     public function countAndSumCart(CookieService $cookieService) {
         $count = 0;
-        if ($cart = $cookieService->getCart()) $count = $cart->getGoodies()->count() + $cart->getStampwishes()->count();
+        if ($cart = $cookieService->getCart()) {
+            $count = $cart->getStampwishes()->count();
+            foreach ($cart->getGoodiesLines() as $line) $count += $line->getQuantity();
+        }
         return new Response($count);
     }
 }

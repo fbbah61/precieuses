@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\Goodies;
+use App\Entity\GoodiesLine;
 use App\Entity\Stampwish;
 use App\Entity\User;
 use App\Form\StampwishType;
@@ -91,6 +92,7 @@ class ProfilController extends AbstractController
      */
     public function liste()
     {
+
         return $this->render('profil/listeGoodies.html.twig', [
             'liste' => $this->getDoctrine()->getRepository(Goodies::class)->findAll()
 
@@ -105,5 +107,37 @@ class ProfilController extends AbstractController
         return $this->render('profil/viewGoodies.html.twig',[
             'goodies' =>$goodies
         ]);
+    }
+    /**
+     * @Route("/addToCart/{id}", name="addToCart")
+     */
+    public function addToCart(Goodies $goodies, CookieService $cookieService, EntityManagerInterface $manager)
+    {
+        if (! $cart = $cookieService->getCart()) {
+            $cart = new Cart();
+            do {
+                $cart->setCode(StringUtils::randomCartCode());
+            } while ($manager->getRepository(Cart::class)->findOneBy(["code" => $cart->getCode()]));
+            $cart->setUser($this->getUser());
+            // if ($this->getUser()) $cart->setUser($this->getUser());
+            $manager->persist($cart);
+        }
+
+//        $cart->addStampwish($stampWish);
+        $gLine = null;
+        foreach ($cart->getGoodiesLines() as $line) {
+            if ($line->getGoodies()->getId() == $goodies->getId()) {
+                $line->setQuantity($line->getQuantity() + 1);
+                $gLine = $line;
+                break;
+            }
+        }
+        if (!$gLine) $cart->getGoodiesLines()->add(new GoodiesLine($goodies, $cart));
+        $manager->flush();
+
+        $response = $this->redirectToRoute('cart');
+        $cookieService->setCart($cart->getCode(), $response);
+        $this->addFlash("success", "Le goodies " . $goodies->getTitle() . " a été ajouté avec succès dans le panier!");
+        return $response;
     }
 }

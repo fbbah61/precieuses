@@ -22,7 +22,7 @@
                     <p class="card-text">{{ lister.prix }}€</p>
                     <hr>
                     <p><a class="btn btn-secondary" href="{{ path('viewGoodies',{'id': lister.id}) }}" role="button">View details &raquo;</a></p>
-{#                    <li><a class="btn btn-secondary" href="{{ path('cart') }}">Ajouter au Panier({{ render(controller('App\\Controller\\CartController::countAndSumCart')) }})</a></li>#}
+                    <p><a class="btn btn-secondary" href="{{ path('addToCart', {'id': lister.id}) }}">Ajouter au Panier</a></p>
 
 
                 </div>

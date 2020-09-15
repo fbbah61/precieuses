@@ -61,14 +61,16 @@ class Goodies
     private $update_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Cart::class, mappedBy="goodies")
+     * @ORM\OneToMany(targetEntity=GoodiesLine::class, mappedBy="goodies")
      */
-    private $carts;
+    private $goodiesLines;
+
 
     public function __construct()
     {
         $this->detailCommandes = new ArrayCollection();
         $this->carts = new ArrayCollection();
+        $this->goodiesLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,31 +198,36 @@ class Goodies
     }
 
     /**
-     * @return Collection|Cart[]
+     * @return Collection|GoodiesLine[]
      */
-    public function getCarts(): Collection
+    public function getGoodiesLines(): Collection
     {
-        return $this->carts;
+        return $this->goodiesLines;
     }
 
-    public function addCart(Cart $cart): self
+    public function addGoodiesLine(GoodiesLine $goodiesLine): self
     {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addGoody($this);
+        if (!$this->goodiesLines->contains($goodiesLine)) {
+            $this->goodiesLines[] = $goodiesLine;
+            $goodiesLine->setGoodies($this);
         }
 
         return $this;
     }
 
-    public function removeCart(Cart $cart): self
+    public function removeGoodiesLine(GoodiesLine $goodiesLine): self
     {
-        if ($this->carts->contains($cart)) {
-            $this->carts->removeElement($cart);
-            $cart->removeGoody($this);
+        if ($this->goodiesLines->contains($goodiesLine)) {
+            $this->goodiesLines->removeElement($goodiesLine);
+            // set the owning side to null (unless already changed)
+            if ($goodiesLine->getGoodies() === $this) {
+                $goodiesLine->setGoodies(null);
+            }
         }
 
         return $this;
     }
+
+
 
 }

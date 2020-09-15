@@ -49,6 +49,11 @@ class Cart
      */
     private $goodies;
 
+    /**
+     * @ORM\OneToMany(targetEntity=GoodiesLine::class, mappedBy="cart", cascade={"persist", "merge"})
+     */
+    private $goodiesLines;
+
     public function __construct()
     {
         $this->stampwishes = new ArrayCollection();
@@ -56,6 +61,7 @@ class Cart
 
         $this->date = new \DateTime();
         $this->isProcessed = false;
+        $this->goodiesLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +169,37 @@ class Cart
     {
         if ($this->goodies->contains($goody)) {
             $this->goodies->removeElement($goody);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GoodiesLine[]
+     */
+    public function getGoodiesLines(): Collection
+    {
+        return $this->goodiesLines;
+    }
+
+    public function addGoodiesLine(GoodiesLine $goodiesLine): self
+    {
+        if (!$this->goodiesLines->contains($goodiesLine)) {
+            $this->goodiesLines[] = $goodiesLine;
+            $goodiesLine->setCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoodiesLine(GoodiesLine $goodiesLine): self
+    {
+        if ($this->goodiesLines->contains($goodiesLine)) {
+            $this->goodiesLines->removeElement($goodiesLine);
+            // set the owning side to null (unless already changed)
+            if ($goodiesLine->getCart() === $this) {
+                $goodiesLine->setCart(null);
+            }
         }
 
         return $this;

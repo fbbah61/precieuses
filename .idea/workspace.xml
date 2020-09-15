@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83ae8809-6c84-4fd5-8037-a12b1369cdb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Handler/CustomAccessDeniedHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Handler/CustomAuthenticationFailureHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Handler/CustomAuthenticationSuccessHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Handler/CustomLogoutSuccessHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/CookieService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/SessionService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Util/CookieKeys.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Util/StringUtils.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200902111239.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200909192057.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200909225155.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccueilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Goodies.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Goodies.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cart/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/profil/listeGoodies.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profil/listeGoodies.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +162,7 @@
       <updated>1599694842462</updated>
       <workItem from="1599694844101" duration="1404000" />
       <workItem from="1599851006872" duration="3687000" />
-      <workItem from="1600022609573" duration="25866000" />
+      <workItem from="1600022609573" duration="31141000" />
     </task>
     <servers />
   </component>
@@ -206,7 +196,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/ProfilController.php</url>
-          <line>59</line>
+          <line>60</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
