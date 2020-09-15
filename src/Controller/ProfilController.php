@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Goodies;
 use App\Entity\Stampwish;
 use App\Entity\User;
 use App\Form\StampwishType;
 use App\Repository\StampwishRepository;
+use App\Service\CookieService;
+use App\Util\StringUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use phpDocumentor\Reflection\Types\This;
@@ -39,12 +42,9 @@ class ProfilController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return RedirectResponse|Response
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Request $request, EntityManagerInterface $manager, CookieService $cookieService)
     {
-            $stampWish = new Stampwish($this->getUser());
-
-
-
+        $stampWish = new Stampwish($this->getUser());
         $form = $this->createForm(StampwishType::class, $stampWish);
         dump($request);
 
@@ -52,12 +52,27 @@ class ProfilController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($stampWish);
-            $manager->flush();
 
-            return $this->redirectToRoute("stamp_wish_view", ["id" => $stampWish->getId()]);
+            if (! $cart = $cookieService->getCart()) {
+                $cart = new Cart();
+                do {
+                    $cart->setCode(StringUtils::randomCartCode());
+                } while ($manager->getRepository(Cart::class)->findOneBy(["code" => $cart->getCode()]));
+                $cart->setUser($this->getUser());
+                // if ($this->getUser()) $cart->setUser($this->getUser());
+                $manager->persist($cart);
+            }
+
+            $cart->addStampwish($stampWish);
+
+            $manager->flush();
+            $response = $this->redirectToRoute("stamp_wish_view", ["id" => $stampWish->getId()]);
+            $cookieService->setCart($cart->getCode(), $response);
+            return $response;
         }
+
         return $this->render('profil/createStampwish.html.twig',[
-        'form' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 

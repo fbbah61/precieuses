@@ -53,6 +53,9 @@ class Cart
     {
         $this->stampwishes = new ArrayCollection();
         $this->goodies = new ArrayCollection();
+
+        $this->date = new \DateTime();
+        $this->isProcessed = false;
     }
 
     public function getId(): ?int
