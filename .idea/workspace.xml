@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83ae8809-6c84-4fd5-8037-a12b1369cdb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccueilController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContactController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Notification/ContactNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Notification/ContactNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accueil/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accueil/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contact/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/emails/contact.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/emails/contact.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/profil/createStampwish.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profil/createStampwish.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="83ae8809-6c84-4fd5-8037-a12b1369cdb2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,6 +160,7 @@
       <workItem from="1599851006872" duration="3687000" />
       <workItem from="1600022609573" duration="39578000" />
       <workItem from="1600344205176" duration="1294000" />
+      <workItem from="1601389463654" duration="701000" />
     </task>
     <servers />
   </component>
