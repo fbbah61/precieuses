@@ -27,7 +27,7 @@ class ContactNotification
     {
         $message = (new \Swift_Message('Message : ' . $contact->getMessage()))
             ->setFrom($contact->getEmail())
-            ->setTo('gregorylacroix78@gmail.com')
+            ->setTo('precieusest78@gmail.com')
             ->setReplyTo($contact->getEmail())
             ->setBody($this->renderer->render('emails/contact.html.twig', [
                 'contact' => $contact

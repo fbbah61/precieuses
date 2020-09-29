@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Notification\ContactNotification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,8 +32,8 @@ class ContactController extends AbstractController
             $manager->flush(); // on execute l'insertion
         }
 
-        return $this->render("/contact.html.twig", [
-            'formContact' => $form->createView()
+        return $this->render("contact/index.html.twig", [
+            'form' => $form->createView()
         ]);
 
     }
