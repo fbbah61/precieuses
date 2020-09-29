@@ -1,15 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block styleshet %}
-	<link rel="stylesheet" href="{{ asset('css/createStampwish.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/createStampwish.css') }}">
 {% endblock %}
 
 
 {% block body %}
-    <h1 class="display-4 text-center my-4">Veuillez vous Inscrire</h1>
-    {{ form_start(form, {'attr' : {'class' : 'part_all col-md-4 mx-auto'}} ) }}
-        {{ form_row(form.theme, {'attr' : {'class' : 'border border-dark'}},
-                                {'label' : "Thème du Stampwish"} ) }}
+
+    <h1 class="col-md-8 mx-auto my-4">Créer votre Stampwish</h1>
+    {{ form_start(form, {'attr' : {'class' : 'part_all col-md-6 mx-auto'}} ) }}
+        {{ form_row(form.theme, {'attr' : {'class' : 'border border-dark'}})}}
+
         {{ form_row(form.nom_expediteur,    {'attr' : {'class' : 'border border-dark'}},
                                             {'label' : "Nom de l'expéditeur"} ) }}
         {{ form_row(form.nom_destinataire,  {'attr' : {'class' : 'border border-dark'}},
@@ -17,5 +18,7 @@
         {{ form_row(form.adresse_destinataire,  {'attr' : {'class' : 'border border-dark'}},
                                                 {'label' : "Adresse du Destinataire"} ) }}
         <button class="style_bouton btn btn-dark border border-light" type="submit"> Créer un Stampwish </button>
-    {{ form_end(form)}}
+    {{ form_end(form) }}
+
+
 {% endblock %}

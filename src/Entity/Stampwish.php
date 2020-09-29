@@ -44,8 +44,21 @@ class Stampwish
      */
     private $detailCommandes;
 
-    public function __construct()
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="stampwishes", fetch="LAZY")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cart::class, inversedBy="stampwishes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cart;
+
+    public function __construct($user)
     {
+        $this->user = $user;
         $this->detailCommandes = new ArrayCollection();
     }
 
@@ -129,6 +142,35 @@ class Stampwish
                 $detailCommande->setStampwish(null);
             }
         }
+
+        return $this;
+    }
+
+    /*public function __toString()
+    {
+        return $this->username. '';
+    }*/
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
 
         return $this;
     }

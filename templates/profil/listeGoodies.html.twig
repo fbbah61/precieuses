@@ -8,12 +8,25 @@
 <div class="row d-flex justify-content-center">
     {% for lister in liste %}
 
-        <div class="col-md-3 border border-secondary rounded mr-1 mb-1 text-center">
-            <img src="{{lister.photo}}" alt=""><hr>
+        {#<div class="col-md-3 border border-secondary rounded mr-1 mb-1 text-center">
+            <div><img src="/uploads/images/{{lister.photo}}" alt="" style="max-width: 100%; height: 20vh;"></div><hr>
             <p>{{lister.description|slice(3,200)|raw}}... </p><hr>
             <p>{{ lister.prix }}€</p><hr>
 
-            <p><a class="btn btn-secondary" href="{{ path('viewGoodies',{'id': lister.id}) }}" role="button">View details &raquo;</a></p>
+        </div>#}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <img src="/uploads/images/{{lister.photo}}" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{lister.description|slice(3,200)|raw}}</h5>
+                    <p class="card-text">{{ lister.prix }}€</p>
+                    <hr>
+                    <p><a class="btn btn-secondary" href="{{ path('viewGoodies',{'id': lister.id}) }}" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-secondary" href="{{ path('addToCart', {'id': lister.id}) }}">Ajouter au Panier</a></p>
+
+
+                </div>
+            </div>
         </div>
 
         {# date() filtre twig qui permet d'afficher la date et l'heure #}

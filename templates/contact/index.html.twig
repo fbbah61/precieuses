@@ -7,19 +7,27 @@
 	<link rel="stylesheet" href="{{ asset('css/all.css') }}">
 {% endblock %}
 
-{% block title %}{{title}}{% endblock %}
+{% block title %}{{'Contacts'}}{% endblock %}
 
 {% block body %}
 	<div class="container d-flex">
 		<div class="part_left col-12 col-md-8">
-			<h1>Form</h1> 
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus, mollitia libero. Illo itaque 
-			possimus perferendis iure totam voluptate illum et, ipsam animi facere maiores odit natus ea deserunt, 
-			voluptatum est?
+			<h1 class="display-4 text-center my-4">Contactez nous</h1>
+			{{ form_start(form, {'attr' : {'class' : 'part_all  rounded col-md-4 mx-auto'}} ) }}
+			{{ form_row(form.Nom,  {'attr' : {'class' : 'border border-dark'}},
+				{'label' : "Username"}) }}
+			{{ form_row(form.email, {'attr' : {'class' : 'border border-dark'}},
+				{'label' : "Email"}) }}
+			{{ form_row(form.sujet,  {'attr' : {'class' : 'border border-dark'}},
+				{'label' : "Sujet"}) }}
+			{{ form_row(form.message,  {'attr' : {'class' : 'border border-dark'}},
+				{'label' : "Message"}) }}
+			<button class="style_bouton btn btn-dark border border-light" type="submit">Envoyer</button>
+			{{ form_end(form)}}
 		</div>
 
 		<div class="part_right col-12 col-md-4">
-			<h1 class="title_contact">{{ title }}</h1>
+			<h1 class="title_contact">{{ 'Contacts' }}</h1>
 			<div class="paragraphe_style">
                 <p> 
 					<h1>info stampwish</h1>    

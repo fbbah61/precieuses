@@ -21,10 +21,13 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login
+                success_handler: App\Handler\CustomAuthenticationSuccessHandler
+#                failure_handler: App\Handler\CustomAuthenticationFailureHandler
 
             logout:
                 path: security_logout
                 target: accueil
+                handlers: [custom_logout_handler]
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
@@ -38,6 +41,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+#        - { path: ^/}
         #- { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUS } # On va changer plustard
         # - { path: ^/profile, roles: ROLE_USER }
         #  - { path: ^/login, roles: ROLE_USER }
